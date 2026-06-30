@@ -286,8 +286,16 @@
   .contact-line a{font-weight:600}
   .contact-line a:hover{color:var(--grano)}
   .contact-line .addr-link{font-weight:400}
-  .map-embed{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);height:100%;min-height:420px;border:1px solid rgba(255,255,255,.1)}
+  .map-embed{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);height:100%;min-height:420px;border:1px solid rgba(255,255,255,.1)}
   .map-embed iframe{width:100%;height:100%;min-height:420px;border:0;display:block;filter:grayscale(.3) contrast(1.05)}
+  .map-open-btn{
+    position:absolute;top:14px;left:14px;z-index:2;
+    background:rgba(14,14,14,.82);color:#fff;font-size:12.5px;font-weight:700;
+    padding:8px 14px;border-radius:999px;backdrop-filter:blur(4px);
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px solid rgba(255,255,255,.18);transition:background .2s;
+  }
+  .map-open-btn:hover{background:var(--tomato)}
 
   /* ---------- FOOTER ---------- */
   footer{background:#070707;color:rgba(255,255,255,.6);padding:50px 0 30px}
@@ -548,10 +556,10 @@
         <div style="font-size:13px;color:rgba(14,14,14,.55)" data-i18n="rev_count">su Google</div>
       </div>
     </div>
-    <p class="rev-sub"><span data-i18n="rev_sub">Recensioni vere dai nostri clienti.</span> <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,17z" target="_blank" rel="noopener" data-i18n="rev_link">Lasciaci una recensione →</a></p>
+    <p class="rev-sub"><span data-i18n="rev_sub">Recensioni vere dai nostri clienti.</span> <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294375,2.110446,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?hl=it-IT&entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" data-i18n="rev_link">Lasciaci una recensione →</a></p>
     <div class="rev-grid" id="revGrid"></div>
     <div class="rev-cta">
-      <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,17z" target="_blank" rel="noopener" class="btn-primary" style="background:var(--ink)">
+      <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294375,2.110446,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?hl=it-IT&entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn-primary" style="background:var(--ink)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
         <span data-i18n="rev_btn">Vedi tutte su Google</span>
       </a>
@@ -582,7 +590,7 @@
           <h4 data-i18n="visit_contact">📍 Contatti</h4>
           <div class="contact-line">
             <span class="ci"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
-            <a class="addr-link" href="https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,645m/data=!3m1!1e3!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Pont del pabelló A, Mercat Central fruites i hortalisses, 08040 Barcelona</a>
+            <a class="addr-link" href="https://www.google.com/maps/place/IL+PONTE/@41.3294375,2.110446,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?hl=it-IT&entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Pont del pabelló A, Mercat Central fruites i hortalisses, 08040 Barcelona</a>
           </div>
           <div class="contact-line">
             <span class="ci"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg></span>
@@ -595,6 +603,10 @@
         </a>
       </div>
       <div class="map-embed">
+        <a class="map-open-btn" href="https://www.google.com/maps/place/IL+PONTE/@41.3294375,2.110446,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?hl=it-IT&entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          <span data-i18n="map_open">Apri in Maps</span>
+        </a>
         <iframe src="https://maps.google.com/maps?q=IL%20PONTE%20Mercabarna%20Barcelona&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Mappa IL PONTE"></iframe>
       </div>
     </div>
@@ -657,7 +669,7 @@
 
 <script>
 /* ============ CONFIG ============ */
-const MAPS_URL = "https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,645m/data=!3m1!1e3!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
+const MAPS_URL = "https://www.google.com/maps/place/IL+PONTE/@41.3294375,2.110446,595m/data=!3m2!1e3!4b1!4m6!3m5!1s0x12a49fbe40991531:0x1e1d835bb60192c8!8m2!3d41.3294376!4d2.1153169!16s%2Fg%2F11mdhvn3t0?hl=it-IT&entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
 
 /* ============ IMAGES (file in /public/img) ============ */
 const IMG = {
@@ -765,7 +777,7 @@ const I18N = {
     rev_eyebrow:"Lo que dicen de nosotros", rev_count:"en Google",
     rev_sub:"Reseñas reales de nuestros clientes.", rev_link:"Déjanos una reseña →", rev_btn:"Ver todas en Google",
     visit_eyebrow:"Ven a vernos", visit_title:"Dónde y cuándo", visit_hours:"🕐 Horario", visit_contact:"📍 Contacto",
-    visit_call:"Llama para pedir",
+    visit_call:"Llama para pedir", map_open:"Abrir en Maps",
     day_mon:"Lunes", day_tue:"Martes", day_wed:"Miércoles", day_thu:"Jueves", day_fri:"Viernes", day_sat:"Sábado", day_sun:"Domingo", closed:"Cerrado",
     foot_about:"Pizza, rosticería siciliana y cocina italiana en el corazón de Mercabarna.",
     foot_nav:"Navega", foot_contact:"Contacto", foot_hours:"Lun–Vie · 07:30–17:30", foot_made:"Hecho con ❤️ y mucha mozzarella",
@@ -795,7 +807,7 @@ const I18N = {
     rev_eyebrow:"Dicono di noi", rev_count:"su Google",
     rev_sub:"Recensioni vere dai nostri clienti.", rev_link:"Lasciaci una recensione →", rev_btn:"Vedi tutte su Google",
     visit_eyebrow:"Vieni a trovarci", visit_title:"Dove e quando", visit_hours:"🕐 Orari", visit_contact:"📍 Contatti",
-    visit_call:"Chiama per ordinare",
+    visit_call:"Chiama per ordinare", map_open:"Apri in Maps",
     day_mon:"Lunedì", day_tue:"Martedì", day_wed:"Mercoledì", day_thu:"Giovedì", day_fri:"Venerdì", day_sat:"Sabato", day_sun:"Domenica", closed:"Chiuso",
     foot_about:"Pizza, rosticceria siciliana e cucina italiana nel cuore di Mercabarna.",
     foot_nav:"Naviga", foot_contact:"Contatti", foot_hours:"Lun–Ven · 07:30–17:30", foot_made:"Fatto con ❤️ e tanta mozzarella",
@@ -825,7 +837,7 @@ const I18N = {
     rev_eyebrow:"What they say about us", rev_count:"on Google",
     rev_sub:"Real reviews from our customers.", rev_link:"Leave us a review →", rev_btn:"See all on Google",
     visit_eyebrow:"Come visit us", visit_title:"Where & when", visit_hours:"🕐 Opening hours", visit_contact:"📍 Contact",
-    visit_call:"Call to order",
+    visit_call:"Call to order", map_open:"Open in Maps",
     day_mon:"Monday", day_tue:"Tuesday", day_wed:"Wednesday", day_thu:"Thursday", day_fri:"Friday", day_sat:"Saturday", day_sun:"Sunday", closed:"Closed",
     foot_about:"Pizza, Sicilian rosticceria and Italian cooking in the heart of Mercabarna.",
     foot_nav:"Browse", foot_contact:"Contact", foot_hours:"Mon–Fri · 07:30–17:30", foot_made:"Made with ❤️ and lots of mozzarella",
