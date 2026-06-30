@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IL PONTE · Pizza Bar · Mercabarna</title>
+<meta name="description" content="Pizza, rosticería siciliana y comida italiana en Mercabarna. Desayunos y almuerzos rápidos. ¡Te esperamos!" />
+<link rel="icon" type="image/webp" href="/favicon.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0e0e;
+    --ink-soft:#1a1a1a;
+    --paper:#f6f1e7;
+    --paper-2:#efe7d6;
+    --cream:#fbf8f1;
+    --tomato:#c4341f;
+    --tomato-dark:#9c2715;
+    --basil:#3f6b3a;
+    --grano:#e7b54a;
+    --line:rgba(14,14,14,.12);
+    --white:#ffffff;
+    --shadow:0 18px 50px -20px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:900;line-height:1.02;letter-spacing:-.01em}
+  .display{font-family:'Bebas Neue',sans-serif;letter-spacing:.02em;font-weight:400}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  section{position:relative}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(14,14,14,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    transition:transform .35s ease;
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;color:#fff}
+  .brand svg{height:30px;width:auto}
+  .brand b{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;line-height:1}
+  .brand span{font-size:9px;letter-spacing:.42em;color:var(--grano);display:block;text-transform:uppercase;margin-top:1px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:rgba(255,255,255,.82);font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--grano)}
+  .top-right{display:flex;align-items:center;gap:14px}
+  .langs{display:flex;gap:6px}
+  .langs button{
+    background:transparent;border:1px solid rgba(255,255,255,.18);
+    border-radius:6px;padding:4px 6px;cursor:pointer;font-size:15px;line-height:1;
+    filter:grayscale(.5) opacity(.7);transition:all .18s;
+  }
+  .langs button:hover{filter:none;border-color:rgba(255,255,255,.5)}
+  .langs button.active{filter:none;border-color:var(--grano);background:rgba(231,181,74,.16)}
+  .call-btn{
+    background:var(--tomato);color:#fff;font-weight:700;font-size:13px;
+    padding:9px 15px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    letter-spacing:.02em;transition:transform .15s,background .2s;white-space:nowrap;
+  }
+  .call-btn:hover{background:var(--tomato-dark);transform:translateY(-1px)}
+  .burger{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+  .burger span{width:24px;height:2px;background:#fff;display:block;transition:.3s}
+  .mobile-nav{display:none}
+  .langs-mobile{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--ink);color:#fff;padding:110px 0 0;overflow:hidden;position:relative;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;padding-bottom:0}
+  .hero-copy{padding:30px 0 70px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--grano);margin-bottom:22px;font-weight:700;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:30px;height:1px;background:var(--grano)}
+  .hero h1{font-size:clamp(44px,7vw,86px);color:#fff}
+  .hero .eyebrow{display:flex;width:fit-content}
+  .hero h1 em{font-style:italic;color:var(--grano);font-weight:500}
+  .hero p.lead{
+    font-size:clamp(16px,2vw,19px);color:rgba(255,255,255,.78);margin:24px 0 32px;
+    max-width:46ch;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-primary{
+    background:var(--tomato);color:#fff;font-weight:700;padding:15px 26px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:9px;font-size:15px;transition:transform .15s,background .2s;
+    border:0;cursor:pointer;
+  }
+  .btn-primary:hover{background:var(--tomato-dark);transform:translateY(-2px)}
+  .btn-ghost{
+    background:transparent;color:#fff;font-weight:600;padding:15px 24px;border-radius:999px;
+    border:1px solid rgba(255,255,255,.25);display:inline-flex;align-items:center;gap:9px;font-size:15px;
+    transition:border-color .2s,background .2s;cursor:pointer;
+  }
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+  .hero-photo{position:relative;align-self:end}
+  .hero-photo img{
+    width:100%;height:clamp(360px,52vh,560px);object-fit:cover;
+    border-radius:20px 20px 0 0;box-shadow:var(--shadow);
+  }
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;border-radius:20px 20px 0 0;
+    background:linear-gradient(to top,rgba(14,14,14,.35),transparent 45%);pointer-events:none;
+  }
+
+  /* ---------- STACCO CONTESTO ---------- */
+  .context-band{
+    position:relative;min-height:340px;display:flex;align-items:center;
+    background-image:var(--context-bg);background-size:cover;background-position:center 35%;
+    background-attachment:fixed;
+  }
+  .context-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,14,.82),rgba(14,14,14,.45))}
+  .context-inner{position:relative;z-index:1;padding:60px 0;color:#fff;max-width:680px}
+  .context-quote{
+    font-family:'Fraunces',serif;font-weight:900;font-style:italic;
+    font-size:clamp(24px,3.4vw,38px);line-height:1.18;margin-bottom:16px;
+  }
+  .context-sub{font-size:14px;letter-spacing:.06em;color:var(--grano);text-transform:uppercase;font-weight:600}
+  @media(max-width:680px){.context-band{background-attachment:scroll}}
+  .hero-badge{
+    position:absolute;top:18px;left:-14px;background:var(--grano);color:var(--ink);
+    font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.05em;
+    padding:9px 16px;border-radius:8px;transform:rotate(-4deg);box-shadow:0 8px 20px rgba(0,0,0,.3);
+  }
+  /* bridge cable divider */
+  .cables{display:block;width:100%;height:46px;color:var(--grano)}
+  .hero-strip{
+    background:var(--grano);color:var(--ink);font-weight:700;
+    display:flex;gap:38px;align-items:center;justify-content:center;flex-wrap:wrap;
+    padding:14px 0;font-size:13.5px;letter-spacing:.04em;
+  }
+  .hero-strip span{display:inline-flex;align-items:center;gap:8px}
+
+  /* ---------- MENU DEL DIA banner ---------- */
+  .mdd{background:var(--paper);padding:34px 0 0}
+  .mdd-card{
+    background:linear-gradient(135deg,var(--ink) 0%,#241f1a 100%);
+    border-radius:20px;padding:32px 34px;color:#fff;display:flex;align-items:center;
+    justify-content:space-between;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .mdd-card::after{
+    content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(231,181,74,.22),transparent 70%);
+  }
+  .mdd-left{display:flex;align-items:center;gap:22px;z-index:1}
+  .mdd-icon{
+    width:64px;height:64px;border-radius:16px;background:var(--tomato);
+    display:grid;place-items:center;flex-shrink:0;font-size:30px;
+  }
+  .mdd h3{font-size:26px;color:#fff;margin-bottom:4px}
+  .mdd p{color:rgba(255,255,255,.72);font-size:14.5px;max-width:42ch}
+  .mdd .btn-primary{z-index:1;background:var(--grano);color:var(--ink)}
+  .mdd .btn-primary:hover{background:#d8a531}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 46px}
+  .sec-eyebrow{
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--tomato);
+    font-weight:700;margin-bottom:14px;
+  }
+  .sec-head h2{font-size:clamp(32px,5vw,52px);margin-bottom:14px}
+  .sec-head p{color:rgba(14,14,14,.62);font-size:16px}
+
+  /* ---------- CHI SIAMO ---------- */
+  .about{padding:80px 0;background:var(--paper)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+  .about-photo{position:relative}
+  .about-photo img{border-radius:18px;box-shadow:var(--shadow);width:100%;height:420px;object-fit:cover}
+  .about-photo .tag{
+    position:absolute;bottom:-16px;right:-12px;background:var(--tomato);color:#fff;
+    padding:14px 20px;border-radius:14px;font-family:'Fraunces',serif;font-weight:900;
+    font-size:18px;box-shadow:var(--shadow);line-height:1.1;
+  }
+  .about-text h2{font-size:clamp(30px,4.5vw,46px);margin-bottom:20px}
+  .about-text p{color:rgba(14,14,14,.72);font-size:16.5px;margin-bottom:16px;max-width:50ch}
+  .about-stats{display:flex;gap:30px;margin-top:28px;flex-wrap:wrap}
+  .stat b{font-family:'Fraunces',serif;font-size:34px;font-weight:900;color:var(--tomato);display:block;line-height:1}
+  .stat span{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,14,14,.55)}
+
+  /* ---------- MENU ---------- */
+  .menu{padding:80px 0;background:var(--ink);color:#fff}
+  .menu .sec-eyebrow{color:var(--grano)}
+  .menu .sec-head h2{color:#fff}
+  .menu .sec-head p{color:rgba(255,255,255,.6)}
+  .menu-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .menu-tabs button{
+    background:transparent;border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.7);
+    padding:9px 18px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;
+    letter-spacing:.04em;transition:all .2s;font-family:'DM Sans',sans-serif;
+  }
+  .menu-tabs button:hover{border-color:rgba(255,255,255,.4);color:#fff}
+  .menu-tabs button.active{background:var(--grano);border-color:var(--grano);color:var(--ink)}
+  .menu-cols{max-width:620px;margin:0 auto}
+  .menu-cat{margin-bottom:34px}
+  .menu-cat h3{
+    font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.05em;color:var(--grano);
+    margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);
+    display:flex;align-items:center;gap:10px;
+  }
+  .menu-item{display:flex;justify-content:space-between;gap:14px;margin-bottom:13px;align-items:baseline}
+  .menu-item .mi-name{font-weight:600;font-size:15px}
+  .menu-item .mi-desc{display:block;font-weight:400;font-size:12.5px;color:rgba(255,255,255,.5);margin-top:2px;font-style:italic}
+  .menu-item .mi-price{
+    font-family:'Fraunces',serif;font-weight:600;color:var(--grano);font-size:15px;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .menu-dots{flex:1;border-bottom:1px dotted rgba(255,255,255,.2);transform:translateY(-4px)}
+  .menu-note{text-align:center;margin-top:30px;color:rgba(255,255,255,.5);font-size:13.5px;font-style:italic}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{padding:80px 0;background:var(--paper)}
+  .gal-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    grid-auto-rows:200px;
+  }
+  .gal-grid figure{overflow:hidden;border-radius:14px;position:relative;cursor:pointer}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .gal-grid figure:hover img{transform:scale(1.07)}
+  .gal-grid .big{grid-column:span 2;grid-row:span 2}
+  .gal-grid .tall{grid-row:span 2}
+  .gal-cap{
+    position:absolute;left:0;right:0;bottom:0;padding:16px 14px 12px;
+    background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;
+    font-family:'Fraunces',serif;font-weight:600;font-size:15px;opacity:0;transition:opacity .3s;
+  }
+  .gal-grid figure:hover .gal-cap{opacity:1}
+
+  /* ---------- RECENSIONI ---------- */
+  .reviews{padding:80px 0 120px;background:linear-gradient(to bottom,var(--paper) 70%,var(--ink))}
+  .rev-top{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px}
+  .rev-score{font-family:'Fraunces',serif;font-weight:900;font-size:54px;color:var(--ink);line-height:1}
+  .rev-stars{color:var(--grano);font-size:22px;letter-spacing:2px}
+  .rev-sub{text-align:center;color:rgba(14,14,14,.55);font-size:14px;margin-bottom:44px}
+  .rev-sub a{color:var(--tomato);font-weight:600;border-bottom:1px solid currentColor}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .rev-card{
+    background:#fff;border-radius:16px;padding:26px;box-shadow:0 10px 34px -18px rgba(0,0,0,.3);
+    border:1px solid var(--line);display:flex;flex-direction:column;
+  }
+  .rev-card .stars{color:var(--grano);font-size:15px;letter-spacing:1px;margin-bottom:12px}
+  .rev-card p{font-size:14.5px;color:rgba(14,14,14,.78);margin-bottom:18px;flex:1;font-style:italic}
+  .rev-author{display:flex;align-items:center;gap:11px}
+  .rev-avatar{
+    width:40px;height:40px;border-radius:50%;background:var(--tomato);color:#fff;
+    display:grid;place-items:center;font-weight:700;font-family:'Fraunces',serif;
+  }
+  .rev-author b{font-size:14px;display:block}
+  .rev-author span{font-size:12px;color:rgba(14,14,14,.5)}
+  .rev-cta{text-align:center;margin-top:40px}
+
+  /* ---------- VISIT / CONTATTI ---------- */
+  .visit{padding:80px 0 60px;background:var(--ink);color:#fff}
+  .visit .sec-eyebrow{color:var(--grano)}
+  .visit .sec-head h2{color:#fff}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+  .info-block{margin-bottom:30px}
+  .info-block h4{
+    font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;color:var(--grano);
+    margin-bottom:12px;display:flex;align-items:center;gap:9px;
+  }
+  .hours-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14.5px}
+  .hours-row.closed{color:rgba(255,255,255,.4)}
+  .hours-row.today{color:var(--grano);font-weight:700}
+  .hours-row .h-open{color:rgba(255,255,255,.8)}
+  .contact-line{display:flex;align-items:center;gap:13px;margin-bottom:14px;font-size:15px}
+  .contact-line .ci{
+    width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);
+    display:grid;place-items:center;flex-shrink:0;color:var(--grano);
+  }
+  .contact-line a{font-weight:600}
+  .contact-line a:hover{color:var(--grano)}
+  .map-embed{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);height:100%;min-height:420px;border:1px solid rgba(255,255,255,.1)}
+  .map-embed iframe{width:100%;height:100%;min-height:420px;border:0;display:block;filter:grayscale(.3) contrast(1.05)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#070707;color:rgba(255,255,255,.6);padding:50px 0 30px}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-brand svg{height:40px;margin-bottom:14px}
+  .foot-brand p{font-size:13.5px;max-width:34ch}
+  .foot-col h5{color:#fff;font-family:'Bebas Neue',sans-serif;letter-spacing:.06em;font-size:16px;margin-bottom:14px}
+  .foot-col a,.foot-col p{display:block;font-size:13.5px;margin-bottom:9px;color:rgba(255,255,255,.6)}
+  .foot-col a:hover{color:var(--grano)}
+  .foot-bottom{padding-top:24px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.4)}
+  .foot-bottom a{color:rgba(255,255,255,.55)}
+
+  /* ---------- MODAL menu del dia ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(7,7,7,.82);backdrop-filter:blur(4px);
+    z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:var(--cream);border-radius:20px;width:min(760px,94vw);max-height:90vh;
+    overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.5);
+    animation:pop .3s ease;
+  }
+  @keyframes pop{from{transform:scale(.94) translateY(10px);opacity:0}to{transform:none;opacity:1}}
+  .modal-head{
+    background:var(--ink);color:#fff;padding:20px 24px;display:flex;align-items:center;
+    justify-content:space-between;gap:14px;
+  }
+  .modal-head h3{font-size:22px;color:#fff;display:flex;align-items:center;gap:10px}
+  .modal-head .close{background:rgba(255,255,255,.1);border:0;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;transition:background .2s}
+  .modal-head .close:hover{background:rgba(255,255,255,.22)}
+  .modal-body{padding:0;overflow:auto;background:#444}
+  .modal-body .pdf-frame{width:100%;height:62vh;border:0;display:block;background:#555}
+  .modal-foot{padding:16px 24px;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;background:var(--cream);border-top:1px solid var(--line)}
+  .modal-foot .btn-primary{padding:12px 20px;font-size:14px}
+  .modal-foot .btn-text{background:none;border:0;color:rgba(14,14,14,.6);font-size:14px;cursor:pointer;font-weight:600;padding:12px}
+
+  /* floating menu del dia pill */
+  .float-mdd{
+    position:fixed;bottom:20px;right:20px;z-index:50;
+    background:var(--tomato);color:#fff;border:0;cursor:pointer;
+    padding:14px 20px;border-radius:999px;font-weight:700;font-size:14px;
+    display:flex;align-items:center;gap:9px;box-shadow:0 14px 36px -10px rgba(196,52,31,.7);
+    animation:bob 2.6s ease-in-out infinite;transition:transform .15s;
+  }
+  .float-mdd:hover{transform:scale(1.05)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:0}
+    .hero-copy{padding:10px 0 44px;text-align:center}
+    .eyebrow{justify-content:center}
+    .hero-cta{justify-content:center}
+    .hero p.lead{margin-inline:auto}
+    .hero-photo img{height:340px;border-radius:18px}
+    .hero-badge{left:8px}
+    .about-grid,.visit-grid{grid-template-columns:1fr;gap:34px}
+    .about-photo .tag{right:8px}
+    .rev-grid{grid-template-columns:1fr}
+    .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+    .gal-grid .big{grid-column:span 2;grid-row:span 2}
+    .map-embed{min-height:300px}
+  }
+  @media(max-width:680px){
+    .nav-links{display:none}
+    .burger{display:flex}
+    .top-right > .langs{display:none}
+    .topbar.nav-open .mobile-nav{
+      display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;
+      background:var(--ink);padding:18px 6vw 26px;gap:4px;border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .topbar.nav-open .mobile-nav a{color:#fff;padding:12px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.07);text-transform:uppercase;letter-spacing:.05em}
+    .langs-mobile{display:flex;gap:10px;padding-top:18px;justify-content:center}
+    .langs-mobile button{font-size:20px;padding:8px 12px}
+    .hero-strip{gap:18px;font-size:12px}
+    .mdd-card{flex-direction:column;text-align:center;align-items:center}
+    .mdd-left{flex-direction:column;text-align:center}
+    .menu-cols{columns:1}
+    .foot-grid{flex-direction:column}
+    .topbar .wrap{gap:8px}
+    .brand span{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="IL PONTE">
+      <img id="logoImg" alt="IL PONTE" style="height:38px;width:auto" />
+    </a>
+
+    <nav class="nav-links">
+      <a href="#about" data-i18n="nav_about">Chi siamo</a>
+      <a href="#menu" data-i18n="nav_menu">Menù</a>
+      <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+      <a href="#reviews" data-i18n="nav_reviews">Recensioni</a>
+      <a href="#visit" data-i18n="nav_visit">Dove siamo</a>
+    </nav>
+
+    <div class="top-right">
+      <div class="langs" role="group" aria-label="Idioma">
+        <button data-lang="es" class="active" title="Español">🇪🇸</button>
+        <button data-lang="it" title="Italiano">🇮🇹</button>
+        <button data-lang="en" title="English">🇬🇧</button>
+      </div>
+      <a href="tel:+34689344163" class="call-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg>
+        <span data-i18n="call">Chiama</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#about" data-i18n="nav_about">Chi siamo</a>
+    <a href="#menu" data-i18n="nav_menu">Menù</a>
+    <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+    <a href="#reviews" data-i18n="nav_reviews">Recensioni</a>
+    <a href="#visit" data-i18n="nav_visit">Dove siamo</a>
+    <div class="langs langs-mobile" role="group" aria-label="Idioma">
+      <button data-lang="es" class="active" title="Español">🇪🇸</button>
+      <button data-lang="it" title="Italiano">🇮🇹</button>
+      <button data-lang="en" title="English">🇬🇧</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow" data-i18n="hero_eyebrow">IL PONTE · Mercabarna</span>
+      <h1 data-i18n="hero_title">Vera pizza italiana,<br><em>nel cuore di Mercabarna</em></h1>
+      <p class="lead" data-i18n="hero_lead">Forno acceso da mattina a sera. Pizza, rosticceria siciliana e cucina italiana per chi lavora al mercato — buona, veloce e fatta come si deve.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" data-open-mdd>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14a1 1 0 0 1 1 1v16l-4-2-4 2-4-2-4 2V4a1 1 0 0 1 1-1zm2 5h10V6H7v2zm0 4h10v-2H7v2zm0 4h7v-2H7v2z"/></svg>
+          <span data-i18n="hero_cta_mdd">Menù del giorno</span>
+        </button>
+        <a href="#menu" class="btn-ghost"><span data-i18n="hero_cta_menu">Guarda il menù</span> →</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="hero-badge" data-i18n="hero_badge">★ 4,8 su Google</div>
+      <img id="heroImg" alt="Pizza appena sfornata da IL PONTE" />
+    </div>
+  </div>
+  <svg class="cables" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 46 C300 6 900 6 1200 46" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    <g stroke="currentColor" stroke-width="1" opacity=".5">
+      <line x1="100" y1="46" x2="100" y2="40"/><line x1="200" y1="46" x2="200" y2="33"/>
+      <line x1="300" y1="46" x2="300" y2="27"/><line x1="400" y1="46" x2="400" y2="22"/>
+      <line x1="500" y1="46" x2="500" y2="19"/><line x1="600" y1="46" x2="600" y2="18"/>
+      <line x1="700" y1="46" x2="700" y2="19"/><line x1="800" y1="46" x2="800" y2="22"/>
+      <line x1="900" y1="46" x2="900" y2="27"/><line x1="1000" y1="46" x2="1000" y2="33"/>
+      <line x1="1100" y1="46" x2="1100" y2="40"/>
+    </g>
+  </svg>
+  <div class="hero-strip">
+    <span data-i18n="strip_1">🍕 Pizza al forno</span>
+    <span data-i18n="strip_2">🇮🇹 Rosticceria siciliana</span>
+    <span data-i18n="strip_3">🛵 Consegna in zona</span>
+    <span data-i18n="strip_4">⏱️ Pranzo veloce</span>
+  </div>
+</section>
+
+<!-- ============ MENU DEL DIA banner ============ -->
+<section class="mdd">
+  <div class="wrap">
+    <div class="mdd-card">
+      <div class="mdd-left">
+        <div class="mdd-icon">🍝</div>
+        <div>
+          <h3 data-i18n="mdd_title">Menù del giorno</h3>
+          <p data-i18n="mdd_text">Ogni giorno piatti freschi diversi: primi, secondi e specialità di stagione. Guarda cosa abbiamo preparato oggi.</p>
+        </div>
+      </div>
+      <button class="btn-primary" data-open-mdd>
+        <span data-i18n="mdd_btn">Vedi il menù di oggi</span> →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHI SIAMO ============ -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img id="teamImg" alt="Il team di IL PONTE" />
+      <div class="tag" data-i18n="about_tag">La famiglia<br>IL PONTE 🇮🇹</div>
+    </div>
+    <div class="about-text">
+      <div class="sec-eyebrow" data-i18n="about_eyebrow">Chi siamo</div>
+      <h2 data-i18n="about_title">Italiani veri, dentro al mercato</h2>
+      <p data-i18n="about_p1">Siamo IL PONTE: una pizzeria e rosticceria italiana nel cuore di Mercabarna. Ogni giorno accendiamo il forno per chi lavora al mercato — con la pizza fatta a mano, la rosticceria siciliana e i piatti di casa.</p>
+      <p data-i18n="about_p2">Niente fronzoli, niente cose complicate: solo cibo buono, accoglienza vera e quel sorriso che ti fa sentire a casa, dalla colazione al pranzo.</p>
+      <div class="about-stats">
+        <div class="stat"><b>4,8</b><span data-i18n="stat_1">Stelle su Google</span></div>
+        <div class="stat"><b>100%</b><span data-i18n="stat_2">Cucina italiana</span></div>
+        <div class="stat"><b>07:30</b><span data-i18n="stat_3">Aperti da mattina</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACCO CONTESTO ============ -->
+<section class="context-band">
+  <div class="context-overlay"></div>
+  <div class="wrap context-inner">
+    <p class="context-quote" data-i18n="context_quote">"Qui al mercato si lavora presto e si mangia bene. Noi siamo aperti per quello."</p>
+    <span class="context-sub" data-i18n="context_sub">— La cucina di IL PONTE, ogni giorno dalle 07:30</span>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n="menu_eyebrow">Il nostro menù</div>
+      <h2 data-i18n="menu_title">Tutto fatto come a casa</h2>
+      <p data-i18n="menu_sub">Pizze al forno, panuozzi, insalate e dolci siciliani. E ogni giorno il nostro menù del giorno.</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs"></div>
+    <div class="menu-cols" id="menuCols"></div>
+    <p class="menu-note" data-i18n="menu_note">I prezzi possono variare. Per il menù del giorno chiamaci o passa a trovarci.</p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n="gal_eyebrow">Galleria</div>
+      <h2 data-i18n="gal_title">Si mangia con gli occhi</h2>
+    </div>
+    <div class="gal-grid" id="galGrid"></div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="sec-eyebrow" data-i18n="rev_eyebrow">Dicono di noi</div>
+    </div>
+    <div class="rev-top">
+      <div class="rev-score">4,8</div>
+      <div>
+        <div class="rev-stars">★★★★★</div>
+        <div style="font-size:13px;color:rgba(14,14,14,.55)" data-i18n="rev_count">su Google</div>
+      </div>
+    </div>
+    <p class="rev-sub"><span data-i18n="rev_sub">Recensioni vere dai nostri clienti.</span> <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,17z" target="_blank" rel="noopener" data-i18n="rev_link">Lasciaci una recensione →</a></p>
+    <div class="rev-grid" id="revGrid"></div>
+    <div class="rev-cta">
+      <a href="https://www.google.com/maps/place/IL+PONTE/@41.3294376,2.1153169,17z" target="_blank" rel="noopener" class="btn-primary" style="background:var(--ink)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+        <span data-i18n="rev_btn">Vedi tutte su Google</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n="visit_eyebrow">Vieni a trovarci</div>
+      <h2 data-i18n="visit_title">Dove e quando</h2>
+    </div>
+    <div class="visit-grid">
+      <div>
+        <div class="info-block">
+          <h4 data-i18n="visit_hours">🕐 Orari</h4>
+          <div class="hours-row" data-day="1"><span data-i18n="day_mon">Lunedì</span><span class="h-open">07:30 – 17:30</span></div>
+          <div class="hours-row" data-day="2"><span data-i18n="day_tue">Martedì</span><span class="h-open">07:30 – 17:30</span></div>
+          <div class="hours-row" data-day="3"><span data-i18n="day_wed">Mercoledì</span><span class="h-open">07:30 – 17:30</span></div>
+          <div class="hours-row" data-day="4"><span data-i18n="day_thu">Giovedì</span><span class="h-open">07:30 – 17:30</span></div>
+          <div class="hours-row" data-day="5"><span data-i18n="day_fri">Venerdì</span><span class="h-open">07:30 – 17:30</span></div>
+          <div class="hours-row closed" data-day="6"><span data-i18n="day_sat">Sabato</span><span data-i18n="closed">Chiuso</span></div>
+          <div class="hours-row closed" data-day="0"><span data-i18n="day_sun">Domenica</span><span data-i18n="closed">Chiuso</span></div>
+        </div>
+        <div class="info-block">
+          <h4 data-i18n="visit_contact">📍 Contatti</h4>
+          <div class="contact-line">
+            <span class="ci"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+            <span>Pont del pabelló A, Mercat Central fruites i hortalisses, 08040 Barcelona</span>
+          </div>
+          <div class="contact-line">
+            <span class="ci"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg></span>
+            <a href="tel:+34689344163">+34 689 34 41 63</a>
+          </div>
+        </div>
+        <a href="tel:+34689344163" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg>
+        <span data-i18n="visit_call">Chiama per ordinare</span>
+        </a>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://maps.google.com/maps?q=IL%20PONTE%20Mercabarna%20Barcelona&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Mappa IL PONTE"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img id="logoImgFoot" alt="IL PONTE" style="height:46px;width:auto;margin-bottom:14px" />
+        <p data-i18n="foot_about">Pizza, rosticceria siciliana e cucina italiana nel cuore di Mercabarna.</p>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot_nav">Naviga</h5>
+        <a href="#about" data-i18n="nav_about">Chi siamo</a>
+        <a href="#menu" data-i18n="nav_menu">Menù</a>
+        <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+        <a href="#visit" data-i18n="nav_visit">Dove siamo</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot_contact">Contatti</h5>
+        <a href="tel:+34689344163">+34 689 34 41 63</a>
+        <p>Mercabarna, 08040 Barcelona</p>
+        <p data-i18n="foot_hours">Lun–Ven · 07:30–17:30</p>
+        <a href="https://www.instagram.com/ilpontemercabarna/" target="_blank" rel="noopener">Instagram →</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 IL PONTE · Mercabarna, Barcelona</span>
+      <span data-i18n="foot_made">Fatto con ❤️ e tanta mozzarella</span>
+    </div>
+  </div>
+</footer>
+
+<!-- floating button -->
+<button class="float-mdd" data-open-mdd>
+  🍝 <span data-i18n="float_mdd">Menù del giorno</span>
+</button>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="mddModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🍝 <span data-i18n="modal_title">Menù del giorno</span></h3>
+      <button class="close" id="mddClose" aria-label="Chiudi">×</button>
+    </div>
+    <div class="modal-body">
+      <iframe class="pdf-frame" id="mddPdf" title="Menù del giorno PDF"></iframe>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-text" id="mddClose2" data-i18n="modal_close">Chiudi</button>
+      <a href="menu-del-dia.pdf" target="_blank" rel="noopener" class="btn-primary">
+        <span data-i18n="modal_download">Apri il PDF</span> ↗
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ IMAGES (file in /public/img) ============ */
+const IMG = {
+  hero:"/img/hero.webp",
+  context:"/img/context.webp",
+  "dessert_girl":"/img/dessert-girl.webp",
+  logo:"/img/logo.webp",
+  "pasta_pro":"/img/pasta-pro.webp",
+  "pizza_burrata":"/img/pizza-burrata.webp",
+  "pizza_verde":"/img/pizza-verde.webp",
+  panino:"/img/panino.webp",
+  mortadella:"/img/mortadella.webp",
+  risotto:"/img/risotto.webp",
+  "taglio_acciughe":"/img/taglio-acciughe.webp",
+  salmone:"/img/salmone.webp",
+  calzone:"/img/calzone.webp",
+  avocado:"/img/avocado.webp",
+  gnocchi:"/img/gnocchi.webp",
+  "pizza_taglio2":"/img/pizza-taglio2.webp",
+  insalata:"/img/insalata.webp",
+  "taglio_zucchine":"/img/taglio-zucchine.webp",
+};
+function setImg(id,key,fallback){const el=document.getElementById(id);if(el&&IMG[key])el.src=IMG[key];else if(el)el.src=fallback;}
+
+/* ============ MENU DATA ============ */
+const MENU = {
+  picar: [
+    {n:"Patate Stick",d:"Patatas fritas",p:"3,00"},
+    {n:"Patate e Würstel",d:"Patatas fritas y würstel",p:"4,00"},
+    {n:"Bruschetta al Pomodoro",d:"Pan pizza, tomate, ajo, orégano, albahaca, aceite EVO",p:"4,00"},
+    {n:"Bruschetta Pomodoro e Tonno",d:"Pan pizza, tomate, atún, cebolla roja, albahaca",p:"5,00"},
+    {n:"Provolone fuso Tomate",d:"Provolone fundido, tomate y orégano",p:"4,50"},
+    {n:"Provolone fuso Guanciale",d:"Provolone fundido y guanciale crujiente",p:"4,90"},
+  ],
+  entrantes:[
+    {n:"Burrata Pugliese 125gr",d:"Ensalada mezcla, rúcula y tomate cherry",p:"9,90"},
+    {n:"Burrata Pugliese 125gr",d:"Tomate cherry y jamón Parma",p:"11,90"},
+    {n:"Insalata Pomodorini e Tonno",d:"Mezcla, mozzarella, aceitunas, atún, cebolla, maíz, cherry",p:"9,00"},
+    {n:"La Mista",d:"Mezcla, mozzarella, aceitunas, cebolla, maíz, cherry, zanahoria, pepino",p:"8,50"},
+  ],
+  panuozzo:[
+    {n:"Cotto e Carciofi",d:"Jamón dulce, mozzarella y alcachofas",p:"6,00"},
+    {n:"Crudo e Mozzarella",d:"Jamón curado, rúcula, tomate, mozzarella, aceite EVO",p:"6,00"},
+    {n:"Mortadella e Burrata",d:"Mortadella, burrata, tomate cherry, rúcula, aceite EVO",p:"6,00"},
+    {n:"Salame Piccante e Funghi",d:"Salami picante, mozzarella y champiñones",p:"5,50"},
+    {n:"Pomodoro e Tonno",d:"Mozzarella, tomate, atún, rúcula y aceite EVO",p:"6,00"},
+    {n:"Würstel e Patatine",d:"Mozzarella, frankfurt, patatas fritas, ketchup y mayonesa",p:"5,50"},
+  ],
+  pizzas:[
+    {n:"Marinara",d:"Tomate, ajo, orégano, albahaca, aceite EVO",p:"6,90"},
+    {n:"Margherita",d:"Tomate, mozzarella, albahaca y aceite EVO",p:"7,50"},
+    {n:"Siciliana",d:"Tomate, mozzarella, anchoas, orégano, alcaparras, albahaca",p:"8,90"},
+    {n:"Americana",d:"Tomate, mozzarella, frankfurt, patatas fritas, albahaca",p:"10,50"},
+    {n:"Capricciosa",d:"Tomate, mozzarella, jamón dulce, champiñones, alcachofas, olivas",p:"11,00"},
+    {n:"Calabrese",d:"Tomate, mozzarella, salami picante, nduja, olivas, cebolla, pimiento",p:"12,00"},
+    {n:"Primavera",d:"Mozzarella, jamón dulce, champiñones, grana padano, albahaca",p:"10,50"},
+    {n:"Tonno e Cipolla",d:"Tomate, mozzarella, cebolla roja, atún, olivas, albahaca",p:"11,00"},
+    {n:"Mortale",d:"Mozzarella, scamorza ahumada, burrata, mortadella, pistacho",p:"12,00"},
+    {n:"Quattro Formaggi",d:"Mozzarella, ricotta, gorgonzola, scamorza ahumada, albahaca",p:"10,50"},
+    {n:"Ortolana",d:"Tomate, mozzarella, pimiento, calabacín, cherry, cebolla, albahaca",p:"10,50"},
+    {n:"Il Ponte",d:"Tomate, mozzarella, jamón curado, rúcula, escamas de grana padano",p:"11,50"},
+    {n:"Amatriciana",d:"Tomate, guanciale, pecorino, albahaca y aceite EVO",p:"11,00"},
+    {n:"Speck e Zola",d:"Mozzarella, gorgonzola, speck, nueces, albahaca, aceite EVO",p:"12,00"},
+  ],
+  calzoni:[
+    {n:"Calzone Salame Piccante",d:"Relleno de ricotta, mozzarella, salami picante, albahaca",p:"10,50"},
+    {n:"Calzone Prosciutto Cotto e Funghi",d:"Relleno de ricotta, mozzarella, jamón curado y champiñones",p:"11,00"},
+  ],
+  bevande:[
+    {n:"Cerveza de barril (Turia / Oro Bilbao / Estrella)",d:"25cl",p:"1,60–1,70"},
+    {n:"Cerveza de barril 33cl",d:"Turia / Oro Bilbao / Estrella",p:"2,10–2,40"},
+    {n:"Refrescos",d:"Coca-Cola, Fanta, Sprite, Ice Tea, Aquarius...",p:"1,90"},
+    {n:"Vichy Catalan / Tónica",d:"",p:"1,90–2,00"},
+    {n:"Agua Natural 1lt / ½lt",d:"",p:"1,10–1,80"},
+  ],
+  postres:[
+    {n:"Tartufo di Pizzo",d:"Helado de avellana y chocolate, corazón de chocolate negro",p:"5,00"},
+    {n:"Tartufo Bianco di Pizzo",d:"Helado fiordilatte y café, corazón de café espresso y amaretto",p:"5,00"},
+    {n:"Cannolo Siciliano",d:"Crujiente relleno de ricotta y pistacho",p:"5,00"},
+  ],
+};
+
+/* ============ I18N ============ */
+const I18N = {
+  es:{
+    brand_tag:"Pizza Bar", nav_about:"Quiénes somos", nav_menu:"Menú", nav_gallery:"Galería",
+    nav_reviews:"Reseñas", nav_visit:"Dónde estamos", call:"Llamar",
+    hero_eyebrow:"IL PONTE · Mercabarna",
+    hero_title:"Auténtica pizza italiana,<br><em>en el corazón de Mercabarna</em>",
+    hero_lead:"Horno encendido de la mañana a la tarde. Pizza, rosticería siciliana y cocina italiana para quien trabaja en el mercado — buena, rápida y bien hecha.",
+    hero_cta_mdd:"Menú del día", hero_cta_menu:"Ver el menú", hero_badge:"★ 4,8 en Google",
+    strip_1:"🍕 Pizza al horno", strip_2:"🇮🇹 Rosticería siciliana", strip_3:"🛵 Reparto en la zona", strip_4:"⏱️ Almuerzo rápido",
+    mdd_title:"Menú del día", mdd_text:"Cada día platos frescos diferentes: primeros, segundos y especialidades de temporada. Mira lo que hemos preparado hoy.",
+    mdd_btn:"Ver el menú de hoy",
+    context_quote:"\"Aquí en el mercado se trabaja temprano y se come bien. Por eso estamos abiertos.\"", context_sub:"— La cocina de IL PONTE, cada día desde las 07:30",
+    about_eyebrow:"Quiénes somos", about_title:"Italianos de verdad, dentro del mercado",
+    about_p1:"Somos IL PONTE: una pizzería y rosticería italiana en el corazón de Mercabarna. Cada día encendemos el horno para quien trabaja en el mercado — con pizza hecha a mano, rosticería siciliana y platos de casa.",
+    about_p2:"Sin florituras, sin complicaciones: solo buena comida, acogida de verdad y esa sonrisa que te hace sentir en casa, desde el desayuno hasta el almuerzo.",
+    about_tag:"La familia<br>IL PONTE 🇮🇹",
+    stat_1:"Estrellas en Google", stat_2:"Cocina italiana", stat_3:"Abiertos desde temprano",
+    menu_eyebrow:"Nuestro menú", menu_title:"Todo hecho como en casa",
+    menu_sub:"Pizzas al horno, panuozzos, ensaladas y dulces sicilianos. Y cada día nuestro menú del día.",
+    menu_note:"Los precios pueden variar. Para el menú del día llámanos o pásate a vernos.",
+    gal_eyebrow:"Galería", gal_title:"Se come con los ojos",
+    rev_eyebrow:"Lo que dicen de nosotros", rev_count:"en Google",
+    rev_sub:"Reseñas reales de nuestros clientes.", rev_link:"Déjanos una reseña →", rev_btn:"Ver todas en Google",
+    visit_eyebrow:"Ven a vernos", visit_title:"Dónde y cuándo", visit_hours:"🕐 Horario", visit_contact:"📍 Contacto",
+    visit_call:"Llama para pedir",
+    day_mon:"Lunes", day_tue:"Martes", day_wed:"Miércoles", day_thu:"Jueves", day_fri:"Viernes", day_sat:"Sábado", day_sun:"Domingo", closed:"Cerrado",
+    foot_about:"Pizza, rosticería siciliana y cocina italiana en el corazón de Mercabarna.",
+    foot_nav:"Navega", foot_contact:"Contacto", foot_hours:"Lun–Vie · 07:30–17:30", foot_made:"Hecho con ❤️ y mucha mozzarella",
+    float_mdd:"Menú del día", modal_title:"Menú del día", modal_close:"Cerrar", modal_download:"Abrir el PDF",
+    cat_picar:"Para picar", cat_entrantes:"Entrantes y ensaladas", cat_panuozzo:"Panuozzo", cat_pizzas:"Pizzas", cat_calzoni:"Calzones", cat_bevande:"Bebidas", cat_postres:"Postres",
+  },
+  it:{
+    brand_tag:"Pizza Bar", nav_about:"Chi siamo", nav_menu:"Menù", nav_gallery:"Galleria",
+    nav_reviews:"Recensioni", nav_visit:"Dove siamo", call:"Chiama",
+    hero_eyebrow:"IL PONTE · Mercabarna",
+    hero_title:"Vera pizza italiana,<br><em>nel cuore di Mercabarna</em>",
+    hero_lead:"Forno acceso da mattina a sera. Pizza, rosticceria siciliana e cucina italiana per chi lavora al mercato — buona, veloce e fatta come si deve.",
+    hero_cta_mdd:"Menù del giorno", hero_cta_menu:"Guarda il menù", hero_badge:"★ 4,8 su Google",
+    strip_1:"🍕 Pizza al forno", strip_2:"🇮🇹 Rosticceria siciliana", strip_3:"🛵 Consegna in zona", strip_4:"⏱️ Pranzo veloce",
+    mdd_title:"Menù del giorno", mdd_text:"Ogni giorno piatti freschi diversi: primi, secondi e specialità di stagione. Guarda cosa abbiamo preparato oggi.",
+    mdd_btn:"Vedi il menù di oggi",
+    context_quote:"\"Qui al mercato si lavora presto e si mangia bene. Noi siamo aperti per quello.\"", context_sub:"— La cucina di IL PONTE, ogni giorno dalle 07:30",
+    about_eyebrow:"Chi siamo", about_title:"Italiani veri, dentro al mercato",
+    about_p1:"Siamo IL PONTE: una pizzeria e rosticceria italiana nel cuore di Mercabarna. Ogni giorno accendiamo il forno per chi lavora al mercato — con la pizza fatta a mano, la rosticceria siciliana e i piatti di casa.",
+    about_p2:"Niente fronzoli, niente cose complicate: solo cibo buono, accoglienza vera e quel sorriso che ti fa sentire a casa, dalla colazione al pranzo.",
+    about_tag:"La famiglia<br>IL PONTE 🇮🇹",
+    stat_1:"Stelle su Google", stat_2:"Cucina italiana", stat_3:"Aperti da mattina",
+    menu_eyebrow:"Il nostro menù", menu_title:"Tutto fatto come a casa",
+    menu_sub:"Pizze al forno, panuozzi, insalate e dolci siciliani. E ogni giorno il nostro menù del giorno.",
+    menu_note:"I prezzi possono variare. Per il menù del giorno chiamaci o passa a trovarci.",
+    gal_eyebrow:"Galleria", gal_title:"Si mangia con gli occhi",
+    rev_eyebrow:"Dicono di noi", rev_count:"su Google",
+    rev_sub:"Recensioni vere dai nostri clienti.", rev_link:"Lasciaci una recensione →", rev_btn:"Vedi tutte su Google",
+    visit_eyebrow:"Vieni a trovarci", visit_title:"Dove e quando", visit_hours:"🕐 Orari", visit_contact:"📍 Contatti",
+    visit_call:"Chiama per ordinare",
+    day_mon:"Lunedì", day_tue:"Martedì", day_wed:"Mercoledì", day_thu:"Giovedì", day_fri:"Venerdì", day_sat:"Sabato", day_sun:"Domenica", closed:"Chiuso",
+    foot_about:"Pizza, rosticceria siciliana e cucina italiana nel cuore di Mercabarna.",
+    foot_nav:"Naviga", foot_contact:"Contatti", foot_hours:"Lun–Ven · 07:30–17:30", foot_made:"Fatto con ❤️ e tanta mozzarella",
+    float_mdd:"Menù del giorno", modal_title:"Menù del giorno", modal_close:"Chiudi", modal_download:"Apri il PDF",
+    cat_picar:"Per stuzzicare", cat_entrantes:"Antipasti e insalate", cat_panuozzo:"Panuozzo", cat_pizzas:"Pizze", cat_calzoni:"Calzoni", cat_bevande:"Bevande", cat_postres:"Dolci",
+  },
+  en:{
+    brand_tag:"Pizza Bar", nav_about:"About us", nav_menu:"Menu", nav_gallery:"Gallery",
+    nav_reviews:"Reviews", nav_visit:"Find us", call:"Call",
+    hero_eyebrow:"IL PONTE · Mercabarna",
+    hero_title:"Authentic Italian pizza,<br><em>in the heart of Mercabarna</em>",
+    hero_lead:"Oven on from morning to evening. Pizza, Sicilian rosticceria and Italian cooking for the people who work at the market — good, fast and made the right way.",
+    hero_cta_mdd:"Today's menu", hero_cta_menu:"See the menu", hero_badge:"★ 4.8 on Google",
+    strip_1:"🍕 Wood-oven pizza", strip_2:"🇮🇹 Sicilian rosticceria", strip_3:"🛵 Local delivery", strip_4:"⏱️ Quick lunch",
+    mdd_title:"Today's menu", mdd_text:"Fresh dishes every day: pastas, mains and seasonal specials. See what we've cooked up today.",
+    mdd_btn:"See today's menu",
+    context_quote:"\"At the market you start early and you eat well. That's what we're open for.\"", context_sub:"— The IL PONTE kitchen, every day from 07:30",
+    about_eyebrow:"About us", about_title:"Real Italians, right inside the market",
+    about_p1:"We're IL PONTE: an Italian pizzeria and rosticceria in the heart of Mercabarna. Every day we fire up the oven for the people working at the market — with hand-made pizza, Sicilian rosticceria and home-style dishes.",
+    about_p2:"No frills, no fuss: just good food, a warm welcome and that smile that makes you feel at home, from breakfast to lunch.",
+    about_tag:"The IL PONTE<br>family 🇮🇹",
+    stat_1:"Stars on Google", stat_2:"Italian kitchen", stat_3:"Open from early",
+    menu_eyebrow:"Our menu", menu_title:"All made like home",
+    menu_sub:"Wood-oven pizzas, panuozzi, salads and Sicilian sweets. And our daily special menu every day.",
+    menu_note:"Prices may vary. For today's menu give us a call or come see us.",
+    gal_eyebrow:"Gallery", gal_title:"You eat with your eyes",
+    rev_eyebrow:"What they say about us", rev_count:"on Google",
+    rev_sub:"Real reviews from our customers.", rev_link:"Leave us a review →", rev_btn:"See all on Google",
+    visit_eyebrow:"Come visit us", visit_title:"Where & when", visit_hours:"🕐 Opening hours", visit_contact:"📍 Contact",
+    visit_call:"Call to order",
+    day_mon:"Monday", day_tue:"Tuesday", day_wed:"Wednesday", day_thu:"Thursday", day_fri:"Friday", day_sat:"Saturday", day_sun:"Sunday", closed:"Closed",
+    foot_about:"Pizza, Sicilian rosticceria and Italian cooking in the heart of Mercabarna.",
+    foot_nav:"Browse", foot_contact:"Contact", foot_hours:"Mon–Fri · 07:30–17:30", foot_made:"Made with ❤️ and lots of mozzarella",
+    float_mdd:"Today's menu", modal_title:"Today's menu", modal_close:"Close", modal_download:"Open the PDF",
+    cat_picar:"To share", cat_entrantes:"Starters & salads", cat_panuozzo:"Panuozzo", cat_pizzas:"Pizzas", cat_calzoni:"Calzones", cat_bevande:"Drinks", cat_postres:"Desserts",
+  }
+};
+
+/* ============ REVIEWS DATA ============ */
+const REVIEWS = {
+  es:[
+    {a:"Joaquim Puigbertran",m:"Local Guide · 121 reseñas",t:"¡Larga vida a la Pizza! Tienes que probarla, es espectacular para un tentempié o una comida. Pizzas deliciosas. ¡5 estrellas! ⭐"},
+    {a:"Alejandro Pérez",m:"3 reseñas",t:"La comida es fantástica y la gente súper amable, un sitio realmente excelente y agradable. 🔝"},
+    {a:"Graziano Defilippis",m:"3 reseñas",t:"Todo bien. Comida: 5. Servicio excelente, volveremos seguro."},
+  ],
+  it:[
+    {a:"Joaquim Puigbertran",m:"Local Guide · 121 recensioni",t:"Lunga vita alla Pizza! Devi provarla, è spettacolare per uno spuntino o un pranzo. Pizze deliziose. 5 stelle! ⭐"},
+    {a:"Alejandro Pérez",m:"3 recensioni",t:"Il cibo è fantastico e le persone super gentili, un posto davvero eccellente e piacevole. 🔝"},
+    {a:"Graziano Defilippis",m:"3 recensioni",t:"Tutto bene. Cibo: 5. Servizio eccellente, torneremo di sicuro."},
+  ],
+  en:[
+    {a:"Joaquim Puigbertran",m:"Local Guide · 121 reviews",t:"Long live the Pizza! You have to try it, it's spectacular for a snack or a meal. Delicious pizzas. 5 stars! ⭐"},
+    {a:"Alejandro Pérez",m:"3 reviews",t:"The food is fantastic and the people super friendly — a really excellent and pleasant place. 🔝"},
+    {a:"Graziano Defilippis",m:"3 reviews",t:"All good. Food: 5. Excellent service, we'll definitely be back."},
+  ]
+};
+
+/* ============ GALLERY DATA ============ */
+const GAL = [
+  {k:"pizza_burrata", cls:"big"},
+  {k:"mortadella"},
+  {k:"pasta_pro"},
+  {k:"context", cls:"tall"},
+  {k:"taglio_acciughe"},
+  {k:"calzone"},
+  {k:"risotto"},
+  {k:"avocado"},
+  {k:"taglio_zucchine", cls:"tall"},
+  {k:"insalata"},
+  {k:"pizza_verde"},
+  {k:"gnocchi"},
+];
+
+/* ============ STATE ============ */
+let LANG = "es";
+let MENU_TAB = "pizzas";
+
+/* ============ RENDER ============ */
+function t(key){return (I18N[LANG] && I18N[LANG][key]) || (I18N.es[key]) || key;}
+
+function renderI18n(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(I18N[LANG] && I18N[LANG][k]!==undefined) el.innerHTML = I18N[LANG][k];
+  });
+  document.querySelectorAll(".langs button").forEach(b=>b.classList.toggle("active", b.dataset.lang===LANG));
+}
+
+function renderMenuTabs(){
+  const order = ["pizzas","panuozzo","picar","entrantes","calzoni","postres","bevande"];
+  const tabsEl = document.getElementById("menuTabs");
+  tabsEl.innerHTML = "";
+  order.forEach(cat=>{
+    const b=document.createElement("button");
+    b.textContent = t("cat_"+cat);
+    b.classList.toggle("active", cat===MENU_TAB);
+    b.onclick=()=>{MENU_TAB=cat;renderMenuTabs();renderMenuItems();};
+    tabsEl.appendChild(b);
+  });
+}
+function renderMenuItems(){
+  const cols=document.getElementById("menuCols");
+  cols.innerHTML="";
+  const items = MENU[MENU_TAB]||[];
+  const cat=document.createElement("div");
+  cat.className="menu-cat";
+  const h=document.createElement("h3");
+  h.textContent=t("cat_"+MENU_TAB);
+  cat.appendChild(h);
+  items.forEach(it=>{
+    const row=document.createElement("div");
+    row.className="menu-item";
+    row.innerHTML=`<div><span class="mi-name">${it.n}</span>${it.d?`<span class="mi-desc">${it.d}</span>`:""}</div>
+      <span class="menu-dots"></span><span class="mi-price">${it.p} €</span>`;
+    cat.appendChild(row);
+  });
+  cols.appendChild(cat);
+}
+
+function renderReviews(){
+  const g=document.getElementById("revGrid");
+  g.innerHTML="";
+  (REVIEWS[LANG]||REVIEWS.es).forEach(r=>{
+    const c=document.createElement("div");
+    c.className="rev-card";
+    c.innerHTML=`<div class="stars">★★★★★</div><p>"${r.t}"</p>
+      <div class="rev-author"><div class="rev-avatar">${r.a[0]}</div>
+      <div><b>${r.a}</b><span>${r.m}</span></div></div>`;
+    g.appendChild(c);
+  });
+}
+
+function renderGallery(){
+  const g=document.getElementById("galGrid");
+  g.innerHTML="";
+  GAL.forEach(it=>{
+    const f=document.createElement("figure");
+    if(it.cls)f.className=it.cls;
+    const img=document.createElement("img");
+    img.src=IMG[it.k]||"";
+    img.alt=it.k;
+    img.loading="lazy";
+    f.appendChild(img);
+    g.appendChild(f);
+  });
+}
+
+function highlightToday(){
+  const today=new Date().getDay();
+  document.querySelectorAll(".hours-row").forEach(r=>{
+    r.classList.remove("today");
+    if(parseInt(r.dataset.day,10)===today && !r.classList.contains("closed")) r.classList.add("today");
+  });
+}
+
+/* ============ MODAL ============ */
+const modal=document.getElementById("mddModal");
+function openMdd(){
+  const pdf=document.getElementById("mddPdf");
+  if(!pdf.src) pdf.src="menu-del-dia.pdf";
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeMdd(){modal.classList.remove("open");document.body.style.overflow="";}
+document.querySelectorAll("[data-open-mdd]").forEach(b=>b.onclick=openMdd);
+document.getElementById("mddClose").onclick=closeMdd;
+document.getElementById("mddClose2").onclick=closeMdd;
+modal.onclick=e=>{if(e.target===modal)closeMdd();};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMdd();});
+
+/* ============ LANG SWITCH ============ */
+document.querySelectorAll(".langs button").forEach(b=>{
+  b.onclick=()=>{LANG=b.dataset.lang;renderAll();document.getElementById("topbar").classList.remove("nav-open");};
+});
+
+/* ============ BURGER ============ */
+const topbar=document.getElementById("topbar");
+document.getElementById("burger").onclick=()=>topbar.classList.toggle("nav-open");
+document.querySelectorAll("#mobileNav a").forEach(a=>a.onclick=()=>topbar.classList.remove("nav-open"));
+
+/* ============ INIT ============ */
+function renderAll(){
+  renderI18n();
+  renderMenuTabs();
+  renderMenuItems();
+  renderReviews();
+  highlightToday();
+}
+setImg("heroImg","hero","");
+setImg("teamImg","dessert_girl","");
+setImg("logoImg","logo","");
+setImg("logoImgFoot","logo","");
+if(IMG.context) document.documentElement.style.setProperty('--context-bg',`url('${IMG.context}')`);
+renderGallery();
+renderAll();
+</script>
+</body>
+</html>
